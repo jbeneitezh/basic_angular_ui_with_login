@@ -1,6 +1,6 @@
 import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
@@ -21,8 +21,10 @@ export class LoginComponent implements OnInit {
     this.authService.authState.subscribe((user) => {
       this.user = user;
       this.loggedIn = (user != null);
-      console.log(this.user)
+      console.log(this.user);
+      console.log('token: '+this.user.authToken);
     });
+    this.createForm();
   }
 
   createForm() {
