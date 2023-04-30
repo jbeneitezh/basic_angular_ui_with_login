@@ -2,22 +2,55 @@ import { GoogleLoginProvider, GoogleSigninButtonModule, SocialAuthServiceConfig,
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // importa BrowserAnimationsModule
 import { ModalModule } from 'ngx-bootstrap/modal';
 
+//Material
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatToolbarModule } from '@angular/material/toolbar';
+
+//Components
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
+
+//Services
+import { AuthService } from './services/login/auth.service';
+import { HttpClientModule } from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
+import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    NavigationBarComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
     SocialLoginModule,
     GoogleSigninButtonModule,
+    
     ModalModule.forRoot(),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ToastrModule.forRoot({
+      timeOut: 3000, // tiempo de duración del mensaje en milisegundos
+      positionClass: 'toast-top-right', // posición del mensaje
+      preventDuplicates: true // evitar que se muestren mensajes duplicados
+    }),
+    //Angular material
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+    MatMenuModule,
+    MatToolbarModule
   ],
   providers: [
     {
@@ -38,7 +71,8 @@ import { LoginComponent } from './login/login.component';
           console.error(err);
         }
       } as SocialAuthServiceConfig,
-    }
+    },
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,0 +1,11 @@
+{
+  "/base-api": {
+      "target": "http://localhost:9503",
+      "secure": false,
+      "logLevel": "debug",
+      "changeOrigin": true,
+      "pathRewrite": {
+        "^/base-api": ""
+      } 
+  }
+}

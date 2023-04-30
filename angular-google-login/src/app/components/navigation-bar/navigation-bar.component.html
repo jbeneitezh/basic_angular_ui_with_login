@@ -1,0 +1,16 @@
+<mat-toolbar color="primary">
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span>My App</span>
+    <span class="spacer"></span>
+    <button mat-button>About</button>
+    <button mat-button>Contact</button>
+    <button mat-button *ngIf="loggedIn">Logout</button>
+    <button mat-button *ngIf="!loggedIn">Login</button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>Elemento1</button>
+      <button mat-menu-item>Elemento2</button>
+    </mat-menu>
+  </mat-toolbar>
+  
