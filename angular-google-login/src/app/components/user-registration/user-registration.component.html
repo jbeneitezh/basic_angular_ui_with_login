@@ -1,0 +1,45 @@
+<div class="registration-container">
+    <form [formGroup]="regForm" (ngSubmit)="onSubmit()" novalidate>
+      <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" type="email" required>
+        <mat-error *ngIf="regForm.get('email').invalid && (regForm.get('email').dirty || regForm.get('email').touched)">
+          Debe ingresar un correo electrónico válido
+        </mat-error>
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill">
+        <mat-label>Contraseña</mat-label>
+        <input matInput formControlName="password" type="password" required>
+        <mat-error *ngIf="regForm.get('password').invalid && (regForm.get('password').dirty || regForm.get('password').touched)">
+          La contraseña debe tener al menos 8 caracteres, incluir una mayúscula, una minúscula, un número y un carácter especial
+        </mat-error>
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill">
+        <mat-label>Nombre de usuario</mat-label>
+        <input matInput formControlName="username" required>
+        <mat-error *ngIf="regForm.get('username').invalid && (regForm.get('username').dirty || regForm.get('username').touched)">
+          Nombre de usuario requerido
+        </mat-error>
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill">
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="firstName" required>
+        <mat-error *ngIf="regForm.get('firstName').invalid && (regForm.get('firstName').dirty || regForm.get('firstName').touched)">
+          Nombre requerido
+        </mat-error>
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill">
+        <mat-label>Apellido</mat-label>
+        <input matInput formControlName="lastName" required>
+        <mat-error *ngIf="regForm.get('lastName').invalid && (regForm.get('lastName').dirty || regForm.get('lastName').touched)">
+          Apellido requerido
+        </mat-error>
+      </mat-form-field>
+  
+      <button mat-raised-button color="primary" type="submit" [disabled]="regForm.invalid">Registrarse</button>
+    </form>
+  </div>

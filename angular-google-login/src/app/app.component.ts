@@ -1,6 +1,6 @@
 
 import { Component } from '@angular/core';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './components/login/login.component';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
@@ -18,5 +18,5 @@ export class AppComponent{
     this.modalRef = this.modalService.show(LoginComponent);
   }
   
-
+  
 }

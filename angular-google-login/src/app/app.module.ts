@@ -4,9 +4,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // importa BrowserAnimationsModule
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { HttpClientModule } from '@angular/common/http';
+
+//Toastr
+import { ToastrModule } from 'ngx-toastr';
 
 //Material
 import { MatButtonModule } from '@angular/material/button';
+import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
@@ -15,20 +20,22 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 
 //Components
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './components/login/login.component';
+import { LogOutComponent } from './components/log-out/log-out.component';
+import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
 
 //Services
 import { AuthService } from './services/login/auth.service';
-import { HttpClientModule } from '@angular/common/http';
-import { ToastrModule } from 'ngx-toastr';
-import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
+import { UserRegistrationComponent } from './components/user-registration/user-registration.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    NavigationBarComponent
+    NavigationBarComponent,
+    LogOutComponent,
+    UserRegistrationComponent
   ],
   imports: [
     BrowserModule,
@@ -40,12 +47,13 @@ import { NavigationBarComponent } from './components/navigation-bar/navigation-b
     ModalModule.forRoot(),
     ReactiveFormsModule,
     ToastrModule.forRoot({
-      timeOut: 3000, // tiempo de duración del mensaje en milisegundos
+      timeOut: 2000, // tiempo de duración del mensaje en milisegundos
       positionClass: 'toast-top-right', // posición del mensaje
       preventDuplicates: true // evitar que se muestren mensajes duplicados
     }),
     //Angular material
     MatButtonModule,
+    MatDividerModule,
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,

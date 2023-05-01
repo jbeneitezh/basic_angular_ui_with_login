@@ -6,8 +6,27 @@
     <span class="spacer"></span>
     <button mat-button>About</button>
     <button mat-button>Contact</button>
-    <button mat-button *ngIf="loggedIn">Logout</button>
-    <button mat-button *ngIf="!loggedIn">Login</button>
+    <button mat-button *ngIf="loggedIn"  (click)="openLogoutModal()">Logout</button>
+    <!-- Botón de Login -->
+    <button mat-button *ngIf="!loggedIn" (click)="openLoginModal()">Login</button>
+
+    <!-- Botón circular con la imagen si existe -->
+    <button mat-icon-button *ngIf="loggedIn && appUser.image" class="user-image">
+      <img [src]="appUser.image" alt="User Image" />
+    </button>
+
+    <!-- Botón circular con el icono de usuario si la imagen no existe -->
+    <button mat-icon-button *ngIf="loggedIn && !appUser.image" class="user-icon">
+      <mat-icon>account_circle</mat-icon>
+    </button>
+
+    <!-- Botón de Logout -->
+    <button mat-icon-button *ngIf="loggedIn" (click)="openLogoutModal()">
+      <mat-icon>logout</mat-icon>
+    </button>
+
+
+
     <mat-menu #menu="matMenu">
       <button mat-menu-item>Elemento1</button>
       <button mat-menu-item>Elemento2</button>

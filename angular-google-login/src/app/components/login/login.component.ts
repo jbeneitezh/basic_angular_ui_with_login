@@ -1,11 +1,14 @@
-import { SocialAuthService, SocialUser, GoogleLoginProvider } from '@abacritt/angularx-social-login';
+import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { BsModalRef } from 'ngx-bootstrap/modal';
-import { AuthService } from '../services/login/auth.service';
-import { JwtAuthenticationRequest } from '../models/jwt-authentication-request';
+import { AuthService } from '../../services/login/auth.service';
+import { JwtAuthenticationRequest } from '../../models/jwt-authentication-request';
 import { ToastrService } from 'ngx-toastr';
-import { AppUserModel } from '../models/app-user-model';
+import { AppUserModel } from '../../models/app-user-model';
+
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -18,6 +21,8 @@ export class LoginComponent implements OnInit {
   loggedIn: boolean;
   loginForm: FormGroup;
   authReq: JwtAuthenticationRequest;
+
+  private authStateChange$ = new Subject<void>(); //test
   
   constructor(private formBuilder: FormBuilder, 
               private modalRef: BsModalRef, 
@@ -26,10 +31,28 @@ export class LoginComponent implements OnInit {
               private toastr: ToastrService) { }
 
   ngOnInit() {
-    this.authService.authState.subscribe((user) => {
+    
+    /*this.authService.authState.subscribe((user) => {
       this.user = user;
       this.signInSocialManagement();
+    });*/
+    this.authService.authState
+      .pipe(takeUntil(this.authStateChange$))
+      .subscribe((user) => {
+        this.user = user;
+        this.signInSocialManagement();
     });
+
+    this.customAuthServ.isLogged().subscribe(loggedIn => {
+      if (loggedIn) {
+        this.loggedIn = loggedIn;
+        this.appUser = this.customAuthServ.getLoggedUser();
+      } else {
+        this.loggedIn = loggedIn;
+        this.appUser = null;
+      }
+    });
+    
     this.createForm();
   }
 
@@ -58,7 +81,26 @@ export class LoginComponent implements OnInit {
     this.loggedIn = (this.user != null);
     console.log(this.user);
     console.log('entre en token: '+this.user.idToken);
-    
+    this.customAuthServ.doGetSocialUserLogin(this.user).subscribe({
+      next: (response) => {
+        console.log('Respuesta bien:', response);
+        if(response.loggedIn){
+          this.loggedIn = true;
+          this.appUser = response;
+          this.authStateChange$.next();
+          this.closeModal();
+        }else{
+          console.log("social login error");
+          this.loggedIn = false;
+          this.showToastErrorLogin();
+        }
+      },
+      error: (error) => {
+        console.log('social login error:', error);
+        this.loggedIn = false;
+        this.showToastErrorLogin();
+      }
+    });
   }
 
   loginFormSubmit(): void{
@@ -87,6 +129,10 @@ export class LoginComponent implements OnInit {
 
   showToastErrorLogin() {
     this.toastr.error('Login error', 'Error en login');
+  }
+
+  ngOnDestroy() {
+    this.authStateChange$.complete();
   }
 
 }

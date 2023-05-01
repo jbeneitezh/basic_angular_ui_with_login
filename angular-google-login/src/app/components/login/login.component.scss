@@ -1,0 +1,82 @@
+/*.animate {
+    transition: all 0.3s ease-in-out;
+    
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+
+  .gradient {
+    background: linear-gradient(to right, #333, #999);
+  }
+
+
+  .box-shadow {
+    box-shadow: 2px 2px 10px #999;
+  }
+
+  .button {
+    background: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    
+    &:hover {
+      background: #999;
+    }
+  }*/
+
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .login-form-field {
+    width: 100%;
+    margin-bottom: 1px;
+  }
+  
+  .login-submit-button {
+    margin-top: 1px;
+  }
+  
+  .google-signin {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1px;
+    margin-bottom: 10px;
+  }
+
+
+
+
+  /*DIVISOR*/
+  .separator-login {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+  
+  .separator-login-text {
+    //position: absolute;
+    background-color: #fff; /* Ajusta el color de fondo para que coincida con el de tu página */
+    padding: 0 8px;
+    z-index: 1;
+    width: 40%;
+    text-align: center;
+    font-weight: bold;
+  }
+  
+  mat-divider {
+    width: 30%;
+
+  }
+
+  /*END DIVISOR*/

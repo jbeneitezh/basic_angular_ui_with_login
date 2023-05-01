@@ -1,0 +1,35 @@
+<div class="modal-header">
+  <h4 class="modal-title">Login</h4>
+  <button mat-icon-button class="close" (click)="closeModal()">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+
+<div class="modal-body">
+  <div class="google-signin" *ngIf="!loggedIn">
+    <asl-google-signin-button type='standard' text='continue_with' size='large'></asl-google-signin-button> 
+  </div>
+  <!-- Separador personalizado -->
+  <div class="separator-login">
+    <mat-divider></mat-divider>
+    <span class="separator-login-text" >OR WITH EMAIL</span>
+    <mat-divider></mat-divider>
+  </div>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+    <mat-form-field appearance="outline" class="login-form-field">
+      <mat-label>Email</mat-label>
+      <input matInput type="email" formControlName="email" placeholder="Enter email">
+      <mat-error *ngIf="loginForm.get('email').invalid && (loginForm.get('email').dirty || loginForm.get('email').touched)">
+        <div *ngIf="loginForm.get('email').errors['required']">Email is required</div>
+        <div *ngIf="loginForm.get('email').errors['email']">
+          Please enter a valid email address
+        </div>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="login-form-field">
+      <mat-label>Password</mat-label>
+      <input matInput type="password" formControlName="password" placeholder="Password">
+    </mat-form-field>
+    <button mat-raised-button color="primary" class="login-submit-button" (click)="loginFormSubmit()" [disabled]="!loginForm.valid">Submit</button>
+  </form>
+</div>
