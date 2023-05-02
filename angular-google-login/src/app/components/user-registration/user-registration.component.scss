@@ -2,12 +2,34 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 2rem;
-  }
-  
-  mat-form-field {
     width: 100%;
-    margin-bottom: 1rem;
+    //max-width: 400px;
+    //margin: 0 auto;
+    //padding: 2rem;
   }
+
+.register-submit-button {
+  margin-top: 1px;
+}
+  
+  
+  
+.separator-login {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+.button-register-container {
+  display: flex;
+  justify-content: center;
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 1px;
+  //margin-bottom: 1rem;
+}
+

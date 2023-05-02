@@ -1,6 +1,6 @@
 export class AppUserModel {
     loggedIn : boolean = false;
-    idUser   : number;
+    id       : number;
     email    : string;
     username : string;
     password : string;

@@ -1,6 +1,14 @@
-<div class="registration-container">
-    <form [formGroup]="regForm" (ngSubmit)="onSubmit()" novalidate>
-      <mat-form-field appearance="fill">
+<div class="modal-header">
+  <h4 class="modal-title">Register</h4>
+  <button mat-icon-button class="close" (click)="closeModal()">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+
+<div class="modal-body">
+  <div class="registration-container">
+    <form [formGroup]="regForm" (ngSubmit)="onSubmitRegister()" novalidate>
+      <mat-form-field appearance="outline">
         <mat-label>Email</mat-label>
         <input matInput formControlName="email" type="email" required>
         <mat-error *ngIf="regForm.get('email').invalid && (regForm.get('email').dirty || regForm.get('email').touched)">
@@ -8,7 +16,7 @@
         </mat-error>
       </mat-form-field>
   
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="outline">
         <mat-label>Contraseña</mat-label>
         <input matInput formControlName="password" type="password" required>
         <mat-error *ngIf="regForm.get('password').invalid && (regForm.get('password').dirty || regForm.get('password').touched)">
@@ -16,7 +24,7 @@
         </mat-error>
       </mat-form-field>
   
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="outline">
         <mat-label>Nombre de usuario</mat-label>
         <input matInput formControlName="username" required>
         <mat-error *ngIf="regForm.get('username').invalid && (regForm.get('username').dirty || regForm.get('username').touched)">
@@ -24,7 +32,7 @@
         </mat-error>
       </mat-form-field>
   
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="outline">
         <mat-label>Nombre</mat-label>
         <input matInput formControlName="firstName" required>
         <mat-error *ngIf="regForm.get('firstName').invalid && (regForm.get('firstName').dirty || regForm.get('firstName').touched)">
@@ -32,14 +40,25 @@
         </mat-error>
       </mat-form-field>
   
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="outline">
         <mat-label>Apellido</mat-label>
         <input matInput formControlName="lastName" required>
         <mat-error *ngIf="regForm.get('lastName').invalid && (regForm.get('lastName').dirty || regForm.get('lastName').touched)">
           Apellido requerido
         </mat-error>
       </mat-form-field>
-  
-      <button mat-raised-button color="primary" type="submit" [disabled]="regForm.invalid">Registrarse</button>
+      
+      <div class="button-register-container">
+        <button mat-raised-button color="primary" class="register-submit-button" [disabled]="regForm.invalid">Register</button>
+      </div>
+      <!--button mat-raised-button color="primary" type="submit" [disabled]="regForm.invalid" >Register</button-->
     </form>
   </div>
+  <div class="separator-login">
+    <mat-divider  dividerWidth="100%"></mat-divider>
+  </div>
+  <div style="display: flex; align-items: center;">
+    <span>Have an account?</span>
+    <button mat-button (click)="openLoginModal()">Login</button>
+  </div>
+</div>

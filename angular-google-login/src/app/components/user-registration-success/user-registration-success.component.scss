@@ -1,0 +1,30 @@
+.success-card-regsuccess {
+    //max-width: 400px;
+    margin: 20px auto;
+    text-align: center;
+    background-color: #f0f4f8;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .success-icon-regsuccess {
+    //font-size: 30px;
+    color: #4caf50;
+  }
+  
+  .success-message-regsuccess {
+    font-size: 18px;
+    color: #616161;
+    margin-bottom: 20px;
+  }
+
+  mat-card-header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  mat-card-actions {
+    display: flex;
+    justify-content: center;
+  }

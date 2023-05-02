@@ -2,11 +2,11 @@
     <button mat-icon-button [matMenuTriggerFor]="menu">
       <mat-icon>menu</mat-icon>
     </button>
-    <span>My App</span>
+    <span (click)="goHome()">My App</span>
     <span class="spacer"></span>
-    <button mat-button>About</button>
-    <button mat-button>Contact</button>
-    <button mat-button *ngIf="loggedIn"  (click)="openLogoutModal()">Logout</button>
+    <button mat-button routerLink="/about">About</button>
+    <button mat-button routerLink="/contact">Contact</button>
+    <!--button mat-button *ngIf="loggedIn"  (click)="openLogoutModal()">Logout</button-->
     <!-- Botón de Login -->
     <button mat-button *ngIf="!loggedIn" (click)="openLoginModal()">Login</button>
 
@@ -27,9 +27,19 @@
 
 
 
-    <mat-menu #menu="matMenu">
+    <!--mat-menu #menu="matMenu">
       <button mat-menu-item>Elemento1</button>
       <button mat-menu-item>Elemento2</button>
+    </mat-menu-->
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item routerLink="/elemento1">Elemento1</button>
+      <button mat-menu-item routerLink="/contact" [matMenuTriggerFor]="subMenu1">Contactonto</button>
+      <button mat-menu-item>Elemento3</button>
     </mat-menu>
+    
+    <mat-menu #subMenu1="matMenu">
+      <button mat-menu-item routerLink="/about">Subelemento 1.1</button>
+      <button mat-menu-item>Subelemento 1.2</button>
+    </mat-menu>
+
   </mat-toolbar>
-  

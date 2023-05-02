@@ -1,7 +1,7 @@
 import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { BsModalRef } from 'ngx-bootstrap/modal';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { AuthService } from '../../services/login/auth.service';
 import { JwtAuthenticationRequest } from '../../models/jwt-authentication-request';
 import { ToastrService } from 'ngx-toastr';
@@ -9,6 +9,7 @@ import { AppUserModel } from '../../models/app-user-model';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { UserRegistrationComponent } from '../user-registration/user-registration.component';
 
 @Component({
   selector: 'app-login',
@@ -26,6 +27,7 @@ export class LoginComponent implements OnInit {
   
   constructor(private formBuilder: FormBuilder, 
               private modalRef: BsModalRef, 
+              private modalService: BsModalService,
               private authService: SocialAuthService,
               private customAuthServ: AuthService,
               private toastr: ToastrService) { }
@@ -122,13 +124,24 @@ export class LoginComponent implements OnInit {
     }); 
   }
 
+  openRegisterModal():void {
+    this.closeModal();
+    this.modalRef = this.modalService.show(UserRegistrationComponent);
+  }
   
   public closeModal(): void {
     this.modalRef.hide();
   }
 
   showToastErrorLogin() {
-    this.toastr.error('Login error', 'Error en login');
+    this.toastr.error('Login error', 'Wrong username or password',
+                {
+                  closeButton: true, 
+                  progressBar: true, 
+                  timeOut: 5000, 
+                  extendedTimeOut: 3000, 
+                  positionClass: 'toast-top-center', 
+                });
   }
 
   ngOnDestroy() {
